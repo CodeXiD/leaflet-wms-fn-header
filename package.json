@@ -1,12 +1,12 @@
 {
-  "name": "leaflet-wms-header",
-  "version": "1.0.9",
-  "description": "Custom headers on Leaflet TileLayer WMS",
+  "name": "leaflet-wms-fn-header",
+  "version": "1.1.0",
+  "description": "Custom Header Function on Leaflet TileLayer WMS",
   "main": "index.js",
   "types": "index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ticinum-aerospace/leaflet-wms-header"
+    "url": "https://github.com/CodeXiD/leaflet-wms-fn-header"
   },
   "keywords": [
     "leaflet",
@@ -17,7 +17,7 @@
     "typescript",
     "types"
   ],
-  "author": "Ticinum Aerospace",
+  "author": "Tkachenko Kirill",
   "license": "ISC",
   "peerDependencies": {
     "leaflet": "^1.7.1"

@@ -7,14 +7,14 @@ declare module 'leaflet' {
       constructor(
         baseUrl: string,
         options: WMSOptions,
-        header: { header: string; value: string }[],
+        header: { header: string; value: string }[] | Function,
         abort?: Observable<any>
       );
     }
     export function wmsHeader(
       baseUrl: string,
       options: WMSOptions,
-      header: { header: string; value: string }[],
+      header: { header: string; value: string }[] | Function,
       abort?: Observable<any>
     ): L.TileLayer.WMSHeader;
   }

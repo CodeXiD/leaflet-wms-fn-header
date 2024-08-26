@@ -5,7 +5,11 @@ import * as DomUtil from "leaflet/src/dom/DomUtil";
 
 async function fetchImage(url, callback, headers, abort, requests) {
   let _headers = {};
-  if (headers) {
+  if(headers && headers instanceof Function) {
+    headers().forEach(h => {
+      _headers[h.header] = h.value;
+    });
+  } else if (headers && Array.isArray(headers)) {
     headers.forEach(h => {
       _headers[h.header] = h.value;
     });
