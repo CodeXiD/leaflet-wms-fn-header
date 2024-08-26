@@ -1,20 +1,26 @@
-# leaflet-wms-header
-Custom headers on Leaflet TileLayer WMS.
-It's a simple plugin that allow to set custom header for WMS interface.
+# leaflet-wms-fn-header
 
-It works with javascript and typescript without any dependencies!
+### In this version you can pass headers as a function if you need to calculate headers at runtime.
+
+Custom Headers for Leaflet TileLayer WMS
+
+This lightweight plugin allows you to set custom headers for the WMS interface in Leaflet.
+
+It works seamlessly with both JavaScript and TypeScript, requiring no additional dependencies!
+
+Fork from [leaflet-wms-header](https://github.com/ticinum-aerospace/leaflet-wms-header)
 
 Based on https://github.com/Leaflet/Leaflet/issues/2091#issuecomment-302706529.
 
 ### Javascript
 ```sh
-$ npm install leaflet leaflet-wms-header --save
+$ npm install leaflet leaflet-wms-fn-header --save
 ```
 
 ```html
 <!-- Assuming your project root is "../" -->
 <script src="../node_modules/leaflet/dist/leaflet.js"></script> 
-<script src="../node_modules/leaflet-wms-header/index.js"></script> 
+<script src="../node_modules/leaflet-wms-fn-header/index.js"></script> 
 ```
 
 ```js
@@ -36,13 +42,38 @@ var wmsLayer = L.TileLayer.wmsHeader(
 ).addTo(map);
 ```
 
+### Headers in a function
+
+```js
+
+let dynamicToken = 'SOME_TOKEN_1';
+
+setTimeout(() => {
+    dynamicToken = 'SOME_TOKEN_2';
+}, 5000)
+
+var wmsLayer = L.TileLayer.wmsHeader(
+    'https://GEOSERVER_PATH/geoserver/wms?',
+    {
+        layers: 'ne:ne',
+        format: 'image/png',
+        transparent: true,
+    },
+    () => [
+        { header: 'Authorization', value: 'JWT ' + dynamicToken },
+        { header: 'content-type', value: 'text/plain'},
+    ],
+    null
+).addTo(map);
+```
+
 ### Typescript
 ```sh
-$ npm install leaflet @types/leaflet leaflet-wms-header --save
+$ npm install leaflet @types/leaflet leaflet-wms-fn-header --save
 ```
 ```ts
 import * as L from 'leaflet';
-import 'leaflet-wms-header';
+import 'leaflet-wms-fn-header';
 
 // YOUR LEAFLET CODE
 

@@ -1,6 +1,6 @@
 {
   "name": "leaflet-wms-fn-header",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Custom Header Function on Leaflet TileLayer WMS",
   "main": "index.js",
   "types": "index.d.ts",
@@ -18,7 +18,7 @@
     "types"
   ],
   "author": "Tkachenko Kirill",
-  "license": "ISC",
+  "license": "MIT",
   "peerDependencies": {
     "leaflet": "^1.7.1"
   },
