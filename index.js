@@ -34,10 +34,13 @@ async function fetchImage(url, callback, headers, abort, requests, onFetchError)
     mode: "cors",
     signal: signal
   }).then(async f => {
-    const blob = await f.blob();
-    callback(blob);
+    if(f.ok) {
+      const blob = await f.blob();
+      callback(blob);
+    } else {
+      if(onFetchError) onFetchError(f)
+    }
   })
-      .catch(onFetchError);
 }
 
 L.TileLayer.WMSHeader = L.TileLayer.WMS.extend({
