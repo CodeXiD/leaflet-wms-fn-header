@@ -1,6 +1,6 @@
 {
   "name": "leaflet-wms-fn-header",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Custom Header Function on Leaflet TileLayer WMS",
   "main": "index.js",
   "types": "index.d.ts",

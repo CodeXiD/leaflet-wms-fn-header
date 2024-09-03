@@ -3,7 +3,7 @@
 import * as Util from "leaflet/src/core/Util";
 import * as DomUtil from "leaflet/src/dom/DomUtil";
 
-async function fetchImage(url, callback, headers, abort, requests) {
+async function fetchImage(url, callback, headers, abort, requests, onFetchError) {
   let _headers = {};
   if(headers && headers instanceof Function) {
     headers().forEach(h => {
@@ -36,15 +36,17 @@ async function fetchImage(url, callback, headers, abort, requests) {
   }).then(async f => {
     const blob = await f.blob();
     callback(blob);
-  });
+  })
+      .catch(onFetchError);
 }
 
 L.TileLayer.WMSHeader = L.TileLayer.WMS.extend({
-  initialize: function (url, options, headers, abort) {
+  initialize: function (url, options, headers, abort, onFetchError = () => {}) {
     L.TileLayer.WMS.prototype.initialize.call(this, url, options);
     this.headers = headers;
     this.abort = abort;
     this.requests = [];
+    this.onFetchError = onFetchError;
   },
   createTile(coords, done) {
     const url = this.getTileUrl(coords);
@@ -64,7 +66,8 @@ L.TileLayer.WMSHeader = L.TileLayer.WMS.extend({
       },
       this.headers,
       this.abort,
-      this.requests
+      this.requests,
+      this.onFetchError
     );
     return img;
   },
@@ -91,6 +94,6 @@ L.TileLayer.WMSHeader = L.TileLayer.WMS.extend({
   }
 });
 
-L.TileLayer.wmsHeader = function (url, options, headers, abort) {
-  return new L.TileLayer.WMSHeader(url, options, headers, abort);
+L.TileLayer.wmsHeader = function (url, options, headers, abort, onFetchError) {
+  return new L.TileLayer.WMSHeader(url, options, headers, abort, onFetchError);
 };

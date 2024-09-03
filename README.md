@@ -38,7 +38,8 @@ var wmsLayer = L.TileLayer.wmsHeader(
         { header: 'Authorization', value: 'JWT ' + MYAUTHTOKEN },
         { header: 'content-type', value: 'text/plain'},
     ],
-    null
+    null, // abort function
+    (err) => console.log (err) // image loading error handling function (optional)
 ).addTo(map);
 ```
 
